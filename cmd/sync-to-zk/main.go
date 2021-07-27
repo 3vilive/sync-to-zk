@@ -20,6 +20,7 @@ type Args struct {
 func main() {
 	var args Args
 	arg.MustParse(&args)
+	log.Printf("args: servers=%s, dirs=%s\n", args.Servers, args.Dirs)
 
 	// connect to zookeeper
 	zkConn, _, err := zk.Connect(args.Servers, 60*time.Second)
