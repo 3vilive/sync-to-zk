@@ -59,7 +59,10 @@ func (s *ZkSync) SyncNodeWithFile(file string) error {
 	}
 
 	// 判断节点是否已经存在
-	nodePath := fmt.Sprintf("/%s", file)
+	nodePath := file
+	if !strings.HasPrefix(nodePath, "/") {
+		nodePath = "/" + nodePath
+	}
 	exists, nodeStat, err := s.ZkConn.Exists(nodePath)
 	if err != nil {
 		return err
